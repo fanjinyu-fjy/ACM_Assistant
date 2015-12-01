@@ -1,0 +1,26 @@
+//
+//  PrefixHeader.pch
+//  ACM_Assistant
+//
+//  Created by 幻月瑶琴 on 15/12/1.
+//  Copyright © 2015年 幻月瑶琴. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#pragma mark 打印日志
+//-------------------打印日志-------------------------
+
+#ifdef DEBUG
+    #define FJYLog(...)  NSLog(__VA_ARGS__)
+#else
+    #define FJYLog(...)
+#endif
+
+
+
+#endif /* PrefixHeader_pch */
