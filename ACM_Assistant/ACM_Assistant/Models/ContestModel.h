@@ -10,4 +10,17 @@
 
 @interface ContestModel : NSObject
 
+@property (nonatomic, assign) int id;
+@property (nonatomic, copy) NSString *oj;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *start_time;
+@property (nonatomic, copy) NSString *week;
+@property (nonatomic, copy) NSString *access;
+
+
+
+
++ (instancetype)contestWithDict:(NSDictionary *)dict;
+
 @end

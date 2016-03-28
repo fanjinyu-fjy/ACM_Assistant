@@ -10,4 +10,10 @@
 
 @interface UIImage (FJY)
 
+
+/** 返回 未渲染的原始图片 */
++ (UIImage *)imageWithOriginalName: (NSString *)imageName;
+
+
+
 @end

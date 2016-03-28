@@ -10,4 +10,12 @@
 
 @implementation UIImage (FJY)
 
++ (UIImage *)imageWithOriginalName:(NSString *)imageName{
+    UIImage *image = [UIImage imageNamed:imageName];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return image;
+}
+
+
+
 @end

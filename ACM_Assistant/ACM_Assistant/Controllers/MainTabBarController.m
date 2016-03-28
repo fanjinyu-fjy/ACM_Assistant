@@ -7,6 +7,10 @@
 //
 
 #import "MainTabBarController.h"
+#import "MainNavigationController.h"
+#import "ContestTableViewController.h"
+
+#import "UIImage+FJY.h"
 
 @interface MainTabBarController ()
 
@@ -16,22 +20,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
+    //向UITabBarController中添加子控制器
+    //最近比赛
+    [self addChildVC:[[ContestTableViewController alloc]init] title:@"比赛" ImageName:nil SelectImageName:nil];
+    //
+    //
+    //
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+/** 向UITabBarController中添加子控制器 */
+- (void)addChildVC:(UIViewController *)vc title:(NSString *)title ImageName:(NSString *)imageName SelectImageName:(NSString *)selectedImageName{
+    //vc.title = title;
+    //设置TabBar的文字 图片
+    vc.navigationItem.title = title;
+    vc.tabBarItem.title = title;
+    vc.tabBarItem.image = [UIImage imageWithOriginalName:imageName];
+    vc.tabBarItem.selectedImage = [UIImage imageWithOriginalName:selectedImageName];
+    //    vc.view.backgroundColor = [UIColor whiteColor];
+    
+    //将导航控制器添加到UITabBarController中
+    MainNavigationController *NVC = [[MainNavigationController alloc]initWithRootViewController:vc];
+    [self addChildViewController:NVC];
 }
-*/
 
 @end

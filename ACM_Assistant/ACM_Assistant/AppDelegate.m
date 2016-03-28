@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "FJYTabBarViewController.h"
+#import "MainTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -19,12 +19,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    FJYTabBarViewController *MainVC = [[FJYTabBarViewController alloc]init];
+    MainTabBarController *MainVC = [[MainTabBarController alloc]init];
     self.window.rootViewController = MainVC;
     
     [self.window makeKeyAndVisible];
+  
     
-    
+
+
     return YES;
 }
 

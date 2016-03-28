@@ -10,4 +10,10 @@
 
 @implementation ContestModel
 
++ (instancetype)contestWithDict:(NSDictionary *)dict{
+    ContestModel *model = [ContestModel new];
+    [model setValuesForKeysWithDictionary:dict];
+    return model;
+}
+
 @end
