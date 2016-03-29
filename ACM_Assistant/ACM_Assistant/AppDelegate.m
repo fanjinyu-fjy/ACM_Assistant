@@ -12,6 +12,10 @@
 
 #import <AFNetworkActivityIndicatorManager.h>
 #import <AFNetworkReachabilityManager.h>
+#import <UMSocial.h>
+#import <UMSocialWechatHandler.h>
+#import <UMSocialQQHandler.h>
+
 @interface AppDelegate ()
 
 @end
@@ -28,10 +32,17 @@
     [self.window makeKeyAndVisible];
   
     
-    //网络
+    // 网络
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-
+    
+    // 友盟
+    [UMSocialData setAppKey:@"56fa2d8de0f55a3b6900338b"];
+    [UMSocialWechatHandler setWXAppId:@"wx4868b35061f87885"
+                            appSecret:@"64020361b8ec4c99936c0e3999a9f249"
+                                  url:@"http://www.huanyueyaoqin.com"];
+    [UMSocialQQHandler setQQWithAppId:@"1105220907" appKey:@"UolBxBLHapSgkBcf" url:@"http://www.huanyueyaoqin.com"];
+    
     return YES;
 }
 

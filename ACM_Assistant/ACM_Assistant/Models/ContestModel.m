@@ -24,7 +24,7 @@
     if (!_cellHeight) {
         
         // 文字左边的
-        CGFloat leadingMargin = 12.0f;
+        CGFloat leadingMargin = 15.0f;
         CGFloat trailingMargin = 45.0f;
         // 文字的最大尺寸
         CGSize maxSize = CGSizeMake(FJYScreenWidth - leadingMargin - trailingMargin, MAXFLOAT);

@@ -63,7 +63,7 @@ static NSString * const ContestCellID = @"contest";
     [self.navigationController.navigationBar fjy_setBackgroundColor:color];
     
     // 增添 历史比赛按钮
-    UIBarButtonItem *historyButton = [UIBarButtonItem new];
+//    UIBarButtonItem *historyButton = [UIBarButtonItem new];
     
 }
 

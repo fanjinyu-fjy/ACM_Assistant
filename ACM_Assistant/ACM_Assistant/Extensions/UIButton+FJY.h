@@ -10,4 +10,7 @@
 
 @interface UIButton (FJY)
 + (UIButton *)buttonWithImageName:(NSString *)imageName SelectImageName:(NSString *)selectImageName target:(id)target action:(SEL)action;
+
+- (void)setButtonAnimation;
+
 @end
