@@ -22,6 +22,11 @@
 		4495BF911CA8DAF40092E8A5 /* UINavigationBar+FJY.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BF901CA8DAF40092E8A5 /* UINavigationBar+FJY.m */; };
 		4495BF951CA8DC8D0092E8A5 /* ContestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BF931CA8DC8C0092E8A5 /* ContestCell.m */; };
 		4495BF961CA8DC8D0092E8A5 /* ContestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4495BF941CA8DC8D0092E8A5 /* ContestCell.xib */; };
+		4495BF991CA966E60092E8A5 /* NSObject+FJY.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BF981CA966E60092E8A5 /* NSObject+FJY.m */; };
+		4495BF9C1CA967120092E8A5 /* UIView+FJY.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BF9B1CA967120092E8A5 /* UIView+FJY.m */; };
+		4495BF9F1CA967610092E8A5 /* UIButton+FJY.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BF9E1CA967610092E8A5 /* UIButton+FJY.m */; };
+		4495BFA51CA96B900092E8A5 /* ContestDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BFA41CA96B900092E8A5 /* ContestDetailController.m */; };
+		4495BFA71CA96BAD0092E8A5 /* ContestDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4495BFA61CA96BAD0092E8A5 /* ContestDetailController.xib */; };
 		A37AC8228559B0812C24C397 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9373BF414A8C103AC6806B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +78,15 @@
 		4495BF921CA8DC8C0092E8A5 /* ContestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContestCell.h; path = Views/ContestCell.h; sourceTree = "<group>"; };
 		4495BF931CA8DC8C0092E8A5 /* ContestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContestCell.m; path = Views/ContestCell.m; sourceTree = "<group>"; };
 		4495BF941CA8DC8D0092E8A5 /* ContestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestCell.xib; path = Views/ContestCell.xib; sourceTree = "<group>"; };
+		4495BF971CA966E60092E8A5 /* NSObject+FJY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+FJY.h"; path = "Extensions/NSObject+FJY.h"; sourceTree = "<group>"; };
+		4495BF981CA966E60092E8A5 /* NSObject+FJY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+FJY.m"; path = "Extensions/NSObject+FJY.m"; sourceTree = "<group>"; };
+		4495BF9A1CA967120092E8A5 /* UIView+FJY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FJY.h"; path = "Extensions/UIView+FJY.h"; sourceTree = "<group>"; };
+		4495BF9B1CA967120092E8A5 /* UIView+FJY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FJY.m"; path = "Extensions/UIView+FJY.m"; sourceTree = "<group>"; };
+		4495BF9D1CA967610092E8A5 /* UIButton+FJY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+FJY.h"; path = "Extensions/UIButton+FJY.h"; sourceTree = "<group>"; };
+		4495BF9E1CA967610092E8A5 /* UIButton+FJY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+FJY.m"; path = "Extensions/UIButton+FJY.m"; sourceTree = "<group>"; };
+		4495BFA31CA96B900092E8A5 /* ContestDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContestDetailController.h; path = Controllers/ContestDetailController.h; sourceTree = "<group>"; };
+		4495BFA41CA96B900092E8A5 /* ContestDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContestDetailController.m; path = Controllers/ContestDetailController.m; sourceTree = "<group>"; };
+		4495BFA61CA96BAD0092E8A5 /* ContestDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestDetailController.xib; path = Controllers/ContestDetailController.xib; sourceTree = "<group>"; };
 		44E400951C0DF4B5005F2939 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B4A0D050F1D1FFBF27E6B4D5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CA84896B22A4FF48630726AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +194,9 @@
 				4495BF841CA8C0B80092E8A5 /* MainNavigationController.m */,
 				4495BF891CA8C9EA0092E8A5 /* ContestTableViewController.h */,
 				4495BF8A1CA8C9EA0092E8A5 /* ContestTableViewController.m */,
+				4495BFA31CA96B900092E8A5 /* ContestDetailController.h */,
+				4495BFA41CA96B900092E8A5 /* ContestDetailController.m */,
+				4495BFA61CA96BAD0092E8A5 /* ContestDetailController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +229,12 @@
 				4495BF871CA8C80B0092E8A5 /* UIColor+FJY.m */,
 				4495BF8F1CA8DAF40092E8A5 /* UINavigationBar+FJY.h */,
 				4495BF901CA8DAF40092E8A5 /* UINavigationBar+FJY.m */,
+				4495BF971CA966E60092E8A5 /* NSObject+FJY.h */,
+				4495BF981CA966E60092E8A5 /* NSObject+FJY.m */,
+				4495BF9A1CA967120092E8A5 /* UIView+FJY.h */,
+				4495BF9B1CA967120092E8A5 /* UIView+FJY.m */,
+				4495BF9D1CA967610092E8A5 /* UIButton+FJY.h */,
+				4495BF9E1CA967610092E8A5 /* UIButton+FJY.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +365,7 @@
 				4495BF961CA8DC8D0092E8A5 /* ContestCell.xib in Resources */,
 				4488DF431BFF1E6400E18482 /* LaunchScreen.storyboard in Resources */,
 				4488DF401BFF1E6400E18482 /* Assets.xcassets in Resources */,
+				4495BFA71CA96BAD0092E8A5 /* ContestDetailController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,11 +441,15 @@
 				4495BF911CA8DAF40092E8A5 /* UINavigationBar+FJY.m in Sources */,
 				4495BF881CA8C80B0092E8A5 /* UIColor+FJY.m in Sources */,
 				4495BF951CA8DC8D0092E8A5 /* ContestCell.m in Sources */,
+				4495BF991CA966E60092E8A5 /* NSObject+FJY.m in Sources */,
+				4495BF9C1CA967120092E8A5 /* UIView+FJY.m in Sources */,
+				4495BF9F1CA967610092E8A5 /* UIButton+FJY.m in Sources */,
 				4495BF851CA8C0B80092E8A5 /* MainNavigationController.m in Sources */,
 				4495BF7D1CA8BC4F0092E8A5 /* MainTabBarController.m in Sources */,
 				4488DF381BFF1E6400E18482 /* AppDelegate.m in Sources */,
 				4495BF8B1CA8C9EA0092E8A5 /* ContestTableViewController.m in Sources */,
 				4495BF821CA8BED70092E8A5 /* UIImage+FJY.m in Sources */,
+				4495BFA51CA96B900092E8A5 /* ContestDetailController.m in Sources */,
 				4495BF8E1CA8CA1F0092E8A5 /* ContestModel.m in Sources */,
 				4488DF351BFF1E6400E18482 /* main.m in Sources */,
 			);

@@ -7,23 +7,25 @@
 //
 
 #import "ContestTableViewController.h"
+#import "ContestDetailController.h"
 #import "ContestCell.h"
 #import "ContestModel.h"
 
 #import <AFNetworking.h>
 #import <MBProgressHUD.h>
 #import <MJRefresh.h>
-
+#import <MJExtension.h>
 #import "UIColor+FJY.h"
 #import "UINavigationBar+FJY.h"
 
 
 #define NAVBAR_CHANGE_POINT 50
+static NSString * const ContestCellID = @"contest";
 
 @interface ContestTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *contests;  //存放 FJYcontest对象
-
+/** ContestModel对象 */
+@property (nonatomic, strong) NSMutableArray *contests;
 
 @end
 
@@ -42,73 +44,62 @@
 #pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //注册
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ContestCell  class]) bundle:nil] forCellReuseIdentifier:ContestCellID];
+    // 配置TableView
+    [self setupTableView];
+    // 配置下拉控件
+    [self setupRefresh];
+    
+}
+
+// 配置TableView
+- (void)setupTableView{
+    
+    self.tableView.backgroundColor = ColorGlobalBG;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIColor * color = [UIColor customBlueColor];
     [self.navigationController.navigationBar fjy_setBackgroundColor:color];
     
-    //设置row的高度为自定义cell的高度
-    self.tableView.rowHeight = 80;
+    // 增添 历史比赛按钮
+    UIBarButtonItem *historyButton = [UIBarButtonItem new];
     
-    //下载刷新数据
-    
-    // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self downData];
-    }];
+}
+
+
+// 配置下拉控件
+- (void)setupRefresh{
+    // 下拉刷新数据
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downData)];
     
     // 马上进入刷新状态
     [self.tableView.mj_header beginRefreshing];
 }
 
-
-- (NSString *) changeName:(NSString *) oj
-{
-    NSString *str = oj;
-    if([str  isEqual: @"Codeforces"]) str = @"CF";
-    if([str  isEqual: @"BestCoder"]) str = @"BC";
-    if([str  isEqual: @"Codechef"]) str = @"CC";
-    if([str  isEqual: @"ACdream"]) str = @"AC";
-    if([str  isEqual: @"Topcoder"]) str = @"TC";
-    
-    return str;
-}
-
 #pragma mark - 下载刷新数据
-
-
 - (void)downData
 {
-    //url链接
+    // url链接
     static NSString *URLStr = @"http://contests.acmicpc.info/contests.json";
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:URLStr parameters:nil success:^(AFHTTPRequestOperation *  operation, id  responseObject) {
+    
+    //
+    [[AFHTTPSessionManager manager]GET:URLStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSArray *contestArray = responseObject;
         for (NSDictionary *contestDict in contestArray) {
-             ContestModel   *contest = [ContestModel contestWithDict:contestDict];
+            ContestModel *contest = [ContestModel contestWithDict:contestDict];
             [self.contests addObject:contest];
         }
         // 刷新表格
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         
-        
-    } failure:^(AFHTTPRequestOperation *  operation, NSError *  error) {
-        
-        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        HUD.labelText = @"网络出现了点故障...";
-        [HUD showAnimated:YES whileExecutingBlock:^{
-            sleep(1.5);
-        } completionBlock:^{
-            [self.tableView.mj_header endRefreshing];
-        }];
-        
-        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
     
 }
-
 
 #pragma mark - UITabBar自动消失
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -130,36 +121,29 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return self.contests.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"contest";
-    ContestCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"ContestCell" owner:self options:nil]lastObject];
-    }
-    
-    ContestModel *contest = self.contests[indexPath.row];
-    
-    cell.oj.text = [self changeName:contest.oj];
-    cell.oj.adjustsFontSizeToFitWidth = YES;
-    cell.name.text = contest.name;
-    cell.time.text = contest.start_time;
-    cell.week.text = contest.week;
-    
+    ContestCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContestCellID forIndexPath:indexPath];
+    cell.contestModel = self.contests[indexPath.row];
     return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ContestModel *contestModel = self.contests[indexPath.row];
+    return contestModel.cellHeight;
 }
 
 #pragma mark - Table View Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    FJYContestDetailController *detailVC = [[FJYContestDetailController alloc]init];
-//    [self.navigationController pushViewController:detailVC animated:YES];
-//    
-//    detailVC.currentContest = self.contests[indexPath.row];
+    ContestDetailController *detailVC = [ContestDetailController new];
+    detailVC.contestModel = self.contests[indexPath.row];
+
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 @end

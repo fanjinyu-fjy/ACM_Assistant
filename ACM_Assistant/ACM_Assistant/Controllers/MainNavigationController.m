@@ -8,6 +8,7 @@
 
 #import "MainNavigationController.h"
 
+#import "UIView+FJY.h"
 #import "UIImage+FJY.h"
 #import "UIColor+FJY.h"
 @implementation MainNavigationController
@@ -27,8 +28,16 @@
     
     
 }
-//
-//
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+    if (self.childViewControllers.count > 0) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
+}
+
+//// 改变push
 //- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
 //    
 //    if (self.childViewControllers.count > 0) {
@@ -37,7 +46,7 @@
 //        [btn setImage:[UIImage imageWithOriginalName:@"navigationButtonReturn"] forState:UIControlStateNormal];
 //        [btn setImage:[UIImage imageWithOriginalName:@"navigationButtonReturnClick"] forState:UIControlStateHighlighted];
 //        btn.size = CGSizeMake(50, 30);
-//        //        btn.backgroundColor = [UIColor redColor];
+//    
 //        btn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
 //        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 0);
 //        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ContestModel;
+
 @interface ContestCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *oj;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *time;
 @property (weak, nonatomic) IBOutlet UILabel *week;
+
+@property (nonatomic, strong) ContestModel *contestModel;
 @end

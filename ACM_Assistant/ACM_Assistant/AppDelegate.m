@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 
+
+#import <AFNetworkActivityIndicatorManager.h>
+#import <AFNetworkReachabilityManager.h>
 @interface AppDelegate ()
 
 @end
@@ -25,7 +28,9 @@
     [self.window makeKeyAndVisible];
   
     
-
+    //网络
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
     return YES;
 }

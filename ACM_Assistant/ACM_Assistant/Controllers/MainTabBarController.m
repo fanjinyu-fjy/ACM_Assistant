@@ -39,8 +39,8 @@
     //设置TabBar的文字 图片
     vc.navigationItem.title = title;
     vc.tabBarItem.title = title;
-    vc.tabBarItem.image = [UIImage imageWithOriginalName:imageName];
-    vc.tabBarItem.selectedImage = [UIImage imageWithOriginalName:selectedImageName];
+//    vc.tabBarItem.image = [UIImage imageWithOriginalName:imageName];
+//    vc.tabBarItem.selectedImage = [UIImage imageWithOriginalName:selectedImageName];
     //    vc.view.backgroundColor = [UIColor whiteColor];
     
     //将导航控制器添加到UITabBarController中
