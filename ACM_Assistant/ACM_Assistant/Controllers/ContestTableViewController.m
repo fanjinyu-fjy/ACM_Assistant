@@ -15,17 +15,21 @@
 #import <MBProgressHUD.h>
 #import <MJRefresh.h>
 #import <MJExtension.h>
+#import <FMDB.h>
 #import "UIColor+FJY.h"
+#import "UIView+FJY.h"
 #import "UINavigationBar+FJY.h"
 
 
 #define NAVBAR_CHANGE_POINT 50
 static NSString * const ContestCellID = @"contest";
 
+
 @interface ContestTableViewController ()
 
 /** ContestModel对象 */
 @property (nonatomic, strong) NSMutableArray *contests;
+@property (nonatomic, copy) NSString *dbPath;
 
 @end
 
@@ -40,18 +44,83 @@ static NSString * const ContestCellID = @"contest";
     return _contests;
 }
 
+#pragma mark - 数据库
+
+// 创建数据库
+- (void)createTable{
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:self.dbPath] == NO) {
+        // create it
+        FMDatabase * db = [FMDatabase databaseWithPath:self.dbPath];
+        if ([db open]) {
+            NSString * sql = @"CREATE TABLE 'Contest' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'oj' VARCHAR(10),'link' VARCHAR(80),'name' VARCHAR(30), 'start_time' VARCHAR(30), 'week' VARCHAR(5), 'star' TINYINT(1))";
+            BOOL res = [db executeUpdate:sql];
+            if (!res) {
+                
+            } else {
+                
+            }
+            [db close];
+        } else {
+            
+        }
+    }
+}
+
+// 插入数据
+- (void)insertData{
+    
+    FMDatabase * db = [FMDatabase databaseWithPath:self.dbPath];
+    if ([db open]) {
+        NSString * sql = @"insert into contest (id, oj, link, name, start_time， week) values(?, ?, ?, ?, ?, ?) ";
+        for (ContestModel *contest in self.contests) {
+            BOOL res = [db executeUpdate:sql, contest.id, contest.oj, contest.link, contest.name, contest.start_time, contest.week];
+            if (!res) {
+                FJYLog(@"error to insert data");
+            } else {
+                FJYLog(@"succ to insert data");
+            }
+        }
+        [db close];
+    }
+}
+
 
 #pragma mark - 生命周期
+- (void)viewWillAppear:(BOOL)animated{
+    FJYLog(@"%s", __func__);
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:0];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self scrollViewDidScroll:self.tableView];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //注册
+    
+    // 注册
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ContestCell  class]) bundle:nil] forCellReuseIdentifier:ContestCellID];
     // 配置TableView
     [self setupTableView];
     // 配置下拉控件
     [self setupRefresh];
     
+    // 数据库路径
+    NSString * doc = PATH_OF_DOCUMENT;
+    NSString * path = [doc stringByAppendingPathComponent:@"contest.sqlite"];
+    self.dbPath = path;
+    
 }
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:0];
+    [self.navigationController.navigationBar fjy_reset];
+}
+
+
 
 // 配置TableView
 - (void)setupTableView{
@@ -83,7 +152,6 @@ static NSString * const ContestCellID = @"contest";
     // url链接
     static NSString *URLStr = @"http://contests.acmicpc.info/contests.json";
     
-    
     //
     [[AFHTTPSessionManager manager]GET:URLStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSArray *contestArray = responseObject;
@@ -91,6 +159,8 @@ static NSString * const ContestCellID = @"contest";
             ContestModel *contest = [ContestModel contestWithDict:contestDict];
             [self.contests addObject:contest];
         }
+        //[self createTable];
+        //[self insertData];
         // 刷新表格
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
@@ -101,17 +171,16 @@ static NSString * const ContestCellID = @"contest";
     
 }
 
+
+
 #pragma mark - UITabBar自动消失
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
+//    FJYLog(@"%s", __func__);
     CGFloat offsetY = scrollView.contentOffset.y;
+//    FJYLog(@"----%f", offsetY);
     if (offsetY > 0) {
-        if (offsetY > 44) {
-            [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:1];
-        }else{
-            [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:(offsetY/44)];
-        }
+        [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation: offsetY > 44 ? 1 : (offsetY/44)];
     }else{
         [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:0];
     }
@@ -141,9 +210,13 @@ static NSString * const ContestCellID = @"contest";
 #pragma mark - Table View Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     ContestDetailController *detailVC = [ContestDetailController new];
     detailVC.contestModel = self.contests[indexPath.row];
-
     [self.navigationController pushViewController:detailVC animated:YES];
+    
+
 }
+
+
 @end

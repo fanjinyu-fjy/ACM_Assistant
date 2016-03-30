@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContestDetailController">
             <connections>
+                <outlet property="NameView" destination="VeL-im-rsq" id="Itw-36-2cU"/>
                 <outlet property="contestName" destination="VVd-Cu-1TP" id="KbZ-8x-gLf"/>
                 <outlet property="openSafari" destination="yds-x3-i3M" id="guE-t4-zhM"/>
                 <outlet property="view" destination="iN0-l3-epB" id="p5C-iY-r0p"/>
@@ -44,6 +45,9 @@
                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                     <state key="normal" title="Go to the official site">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="0.67743136472809029" green="0.70101249883357686" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>

@@ -26,7 +26,7 @@ static char coverViewKey;
     objc_setAssociatedObject(self, &coverViewKey, coverView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-
+// 设置背景颜色
 - (void)fjy_setBackgroundColor:(UIColor *)backgroundColor
 {
     if (!self.coverView) {
@@ -41,6 +41,7 @@ static char coverViewKey;
 
 - (void)fjy_setNavigatdionBarTranslation:(CGFloat)translation
 {
+    FJYLog(@"%f", translation);
     [self fjy_setTranslationY:-44*translation];
     [self fjy_setElementsAlpha:1-translation];
 }
@@ -70,4 +71,10 @@ static char coverViewKey;
     
 }
 
+- (void)fjy_reset
+{
+    [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.coverView removeFromSuperview];
+    self.coverView = nil;
+}
 @end

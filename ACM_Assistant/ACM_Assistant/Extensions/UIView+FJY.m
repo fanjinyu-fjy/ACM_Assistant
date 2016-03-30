@@ -24,6 +24,17 @@
     
 }
 
+//origin
+- (void)setOrigin:(CGPoint)origin{
+    CGRect frame = self.frame;
+    frame.origin = origin;
+    self.frame = frame;
+}
+
+- (CGPoint)origin{
+    return self.frame.origin;
+}
+
 //width
 - (void)setWidth:(CGFloat)width{
     CGRect frame = self.frame;

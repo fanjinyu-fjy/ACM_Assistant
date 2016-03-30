@@ -25,29 +25,25 @@ static CGFloat CellMargin = 1.0f;
 }
 
 - (void)setFrame:(CGRect)frame{
-    
-    frame.origin.x += CellMargin;
     frame.origin.y += CellMargin;
-    
-    frame.size.width -= 2 * CellMargin;
     frame.size.height -= CellMargin;
     
     //一定要调用父类
     [super setFrame:frame];
 }
 
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
-    [super setHighlighted:highlighted animated:animated];
-    if (highlighted) {
-        POPBasicAnimation *cellBasicAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        cellBasicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.99, 0.99)];
-        [self.layer pop_addAnimation:cellBasicAnimation forKey:@"cellBasicAnimation"];
-    } else {
-        POPSpringAnimation *cellSpringAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        cellSpringAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        cellSpringAnimation.springBounciness = 10.0;
-//        cellSpringAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(3.0, 3.0)];
-        [self.layer pop_addAnimation:cellSpringAnimation forKey:@"cellSpringAnimation"];
-    }
-}
+//- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+//    [super setHighlighted:highlighted animated:animated];
+//    if (highlighted) {
+//        POPBasicAnimation *cellBasicAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//        cellBasicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(0.99, 0.99)];
+//        [self.layer pop_addAnimation:cellBasicAnimation forKey:@"cellBasicAnimation"];
+//    } else {
+//        POPSpringAnimation *cellSpringAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//        cellSpringAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+//        cellSpringAnimation.springBounciness = 10.0;
+////        cellSpringAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(3.0, 3.0)];
+//        [self.layer pop_addAnimation:cellSpringAnimation forKey:@"cellSpringAnimation"];
+//    }
+//}
 @end

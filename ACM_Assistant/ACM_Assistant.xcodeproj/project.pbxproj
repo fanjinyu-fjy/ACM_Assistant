@@ -150,6 +150,7 @@
 				44E400951C0DF4B5005F2939 /* PrefixHeader.pch */,
 				4488DF411BFF1E6400E18482 /* LaunchScreen.storyboard */,
 				440E96761CAA98CA00EA87E8 /* Assets.xcassets */,
+				4488DF441BFF1E6400E18482 /* Info.plist */,
 				4495BF771CA6C95A0092E8A5 /* Models */,
 				4495BF761CA6C93C0092E8A5 /* Views */,
 				4495BF751CA6C9040092E8A5 /* Controllers */,
@@ -162,7 +163,6 @@
 		4488DF331BFF1E6400E18482 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4488DF441BFF1E6400E18482 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

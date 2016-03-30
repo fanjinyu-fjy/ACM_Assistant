@@ -10,14 +10,17 @@
 #import "ContestModel.h"
 
 #import "UIButton+FJY.h"
+#import "UIView+FJY.h"
 
 #import <UMSocial.h>
 #import <UMSocialData.h>
 #import <SafariServices/SafariServices.h>
 
+#import "UINavigationBar+FJY.h"
 @interface ContestDetailController()<SFSafariViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contestName;
 @property (weak, nonatomic) IBOutlet UIButton *openSafari;
+@property (weak, nonatomic) IBOutlet UIView *NameView;
 
 @end
 
@@ -25,14 +28,18 @@
 
 - (void)viewDidLoad{
     
+   self.title = self.contestModel.oj;
     [self setupVC];
+    
+    
 }
+
 
 - (void)setupVC{
     
     [self.openSafari setButtonAnimation];
+    self.title = self.contestModel.oj;
     
-    self.navigationItem.title = self.contestModel.oj;
     self.contestName.text = self.contestModel.name;
     
     UIButton *shareButton = [[UIButton alloc]init];
@@ -50,13 +57,23 @@
 /** 分享 */
 - (void)socialShare{
     ContestModel *contest = self.contestModel;
+    
+    // 设置跳转链接
     [UMSocialData defaultData].extConfig.wechatSessionData.url = contest.link;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = [NSString stringWithFormat:@"%@:%@",contest.oj, contest.name];
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = contest.link;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = [NSString stringWithFormat:@"%@\n%@\n%@",contest.oj,contest.name, contest.start_time];
+    
     [UMSocialData defaultData].extConfig.qqData.url = contest.link;
+    [UMSocialData defaultData].extConfig.qqData.title = contest.oj;
+    [UMSocialData defaultData].extConfig.qzoneData.url = contest.link;
+    [UMSocialData defaultData].extConfig.qzoneData.title = contest.oj;
+    
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"56fa2d8de0f55a3b6900338b"
-                                      shareText:[NSString stringWithFormat:@"%@: %@", contest.oj, contest.name]
+                                      shareText:[NSString stringWithFormat:@"%@ \n%@",contest.name, contest.start_time]
                                      shareImage:[UIImage imageNamed:@"shareIcon"]
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToQQ,UMShareToWechatTimeline, nil] delegate:nil];
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToQQ,UMShareToWechatTimeline,UMShareToQzone, nil] delegate:nil];
 }
 
 

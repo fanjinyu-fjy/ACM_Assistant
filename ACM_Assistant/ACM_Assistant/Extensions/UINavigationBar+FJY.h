@@ -10,11 +10,12 @@
 
 @interface UINavigationBar (FJY)
 
+
 - (void)fjy_setBackgroundColor:(UIColor *)backgroundColor;
 - (void)fjy_setTranslationY:(CGFloat)translationY;
 - (void)fjy_setElementsAlpha:(CGFloat)alpha;
 
 - (void)fjy_setNavigatdionBarTranslation:(CGFloat)translation;
 
-
+- (void)fjy_reset;
 @end
