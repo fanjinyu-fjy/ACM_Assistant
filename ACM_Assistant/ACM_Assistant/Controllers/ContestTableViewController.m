@@ -29,6 +29,7 @@ static NSString * const ContestCellID = @"contest";
 
 /** ContestModel对象 */
 @property (nonatomic, strong) NSMutableArray *contests;
+/** contest数据表路径 */
 @property (nonatomic, copy) NSString *dbPath;
 
 @end
@@ -54,12 +55,12 @@ static NSString * const ContestCellID = @"contest";
         // create it
         FMDatabase * db = [FMDatabase databaseWithPath:self.dbPath];
         if ([db open]) {
-            NSString * sql = @"CREATE TABLE 'Contest' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'oj' VARCHAR(10),'link' VARCHAR(80),'name' VARCHAR(30), 'start_time' VARCHAR(30), 'week' VARCHAR(5), 'star' TINYINT(1))";
+            NSString * sql = @"CREATE TABLE 'Contest' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'oj' VARCHAR(10),'link' VARCHAR(80),'name' VARCHAR(30), 'start_time' VARCHAR(30), 'week' VARCHAR(5), 'star' TINYINT DEFAULT 0)";
             BOOL res = [db executeUpdate:sql];
             if (!res) {
-                
+                FJYLog(@"error to create db");
             } else {
-                
+                FJYLog(@"succ to create db");
             }
             [db close];
         } else {
@@ -73,9 +74,9 @@ static NSString * const ContestCellID = @"contest";
     
     FMDatabase * db = [FMDatabase databaseWithPath:self.dbPath];
     if ([db open]) {
-        NSString * sql = @"insert into contest (id, oj, link, name, start_time， week) values(?, ?, ?, ?, ?, ?) ";
+        NSString * sql = @"insert into contest (id, oj, link, name, start_time, week) values(?, ?, ?, ?, ?, ?)";
         for (ContestModel *contest in self.contests) {
-            BOOL res = [db executeUpdate:sql, contest.id, contest.oj, contest.link, contest.name, contest.start_time, contest.week];
+            BOOL res = [db executeUpdate:sql, [NSNumber numberWithInteger:contest.id], contest.oj, contest.link, contest.name, contest.start_time, contest.week];
             if (!res) {
                 FJYLog(@"error to insert data");
             } else {
@@ -89,7 +90,7 @@ static NSString * const ContestCellID = @"contest";
 
 #pragma mark - 生命周期
 - (void)viewWillAppear:(BOOL)animated{
-    FJYLog(@"%s", __func__);
+//    FJYLog(@"%s", __func__);
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:0];
 }
@@ -103,15 +104,17 @@ static NSString * const ContestCellID = @"contest";
     
     // 注册
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ContestCell  class]) bundle:nil] forCellReuseIdentifier:ContestCellID];
+    // 数据库路径
+    NSString * doc = PATH_OF_DOCUMENT;
+    NSString * path = [doc stringByAppendingPathComponent:@"contest.sqlite"];
+    self.dbPath = path;
+    
     // 配置TableView
     [self setupTableView];
     // 配置下拉控件
     [self setupRefresh];
     
-    // 数据库路径
-    NSString * doc = PATH_OF_DOCUMENT;
-    NSString * path = [doc stringByAppendingPathComponent:@"contest.sqlite"];
-    self.dbPath = path;
+
     
 }
 - (void)viewDidDisappear:(BOOL)animated{
@@ -142,8 +145,33 @@ static NSString * const ContestCellID = @"contest";
     // 下拉刷新数据
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downData)];
     
-    // 马上进入刷新状态
-    [self.tableView.mj_header beginRefreshing];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:self.dbPath] == NO) {
+        // 马上进入刷新状态
+        [self.tableView.mj_header beginRefreshing];
+    }else{
+
+        // 从数据库中导出数据
+        FMDatabase *db = [FMDatabase databaseWithPath:self.dbPath];
+        if ([db open]) {
+            NSString *sql = @"select * from contest c Where strftime(start_time) > CURRENT_TIMESTAMP ORDER By c.id";
+            FMResultSet *rs = [db executeQuery:sql];
+            [self.contests removeAllObjects];
+            while ([rs next]) {
+                ContestModel *contest = [[ContestModel alloc]init];
+                contest.id = [rs intForColumn:@"id"];
+                contest.oj = [rs stringForColumn:@"oj"];
+                contest.link = [rs stringForColumn:@"link"];
+                contest.name = [rs stringForColumn:@"name"];
+                contest.start_time = [rs stringForColumn:@"start_time"];
+                contest.week = [rs stringForColumn:@"week"];
+                [self.contests addObject:contest];
+            }
+            [self.tableView reloadData];
+            [db close];
+        }
+    }
+    
 }
 
 #pragma mark - 下载刷新数据
@@ -151,7 +179,6 @@ static NSString * const ContestCellID = @"contest";
 {
     // url链接
     static NSString *URLStr = @"http://contests.acmicpc.info/contests.json";
-    
     //
     [[AFHTTPSessionManager manager]GET:URLStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSArray *contestArray = responseObject;
@@ -159,8 +186,8 @@ static NSString * const ContestCellID = @"contest";
             ContestModel *contest = [ContestModel contestWithDict:contestDict];
             [self.contests addObject:contest];
         }
-        //[self createTable];
-        //[self insertData];
+        [self createTable];
+        [self insertData];
         // 刷新表格
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];

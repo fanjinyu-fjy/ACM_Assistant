@@ -41,7 +41,7 @@ static char coverViewKey;
 
 - (void)fjy_setNavigatdionBarTranslation:(CGFloat)translation
 {
-    FJYLog(@"%f", translation);
+//    FJYLog(@"%f", translation);
     [self fjy_setTranslationY:-44*translation];
     [self fjy_setElementsAlpha:1-translation];
 }

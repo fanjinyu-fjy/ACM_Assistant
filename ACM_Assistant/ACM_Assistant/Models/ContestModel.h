@@ -12,7 +12,7 @@
 @interface ContestModel : NSObject
 
 /** 比赛ID */
-@property (nonatomic, assign) int id;
+@property (nonatomic, assign) NSInteger id;
 /** 比赛OJ */
 @property (nonatomic, copy) NSString *oj;
 /** 比赛链接 */

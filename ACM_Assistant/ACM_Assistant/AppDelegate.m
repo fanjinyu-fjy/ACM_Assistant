@@ -38,8 +38,8 @@
     
     // 友盟
     [UMSocialData setAppKey:@"56fa2d8de0f55a3b6900338b"];
-    [UMSocialWechatHandler setWXAppId:@"wx4868b35061f87885"
-                            appSecret:@"64020361b8ec4c99936c0e3999a9f249"
+    [UMSocialWechatHandler setWXAppId:@"wx0405a76fbcb687a1"
+                            appSecret:@"b8751bbd30ed246bfe6ff776b5c25e3f"
                                   url:@"http://www.huanyueyaoqin.com"];
     [UMSocialQQHandler setQQWithAppId:@"1105220907" appKey:@"UolBxBLHapSgkBcf" url:@"http://www.huanyueyaoqin.com"];
     
