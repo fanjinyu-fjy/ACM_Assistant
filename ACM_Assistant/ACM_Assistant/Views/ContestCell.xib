@@ -21,7 +21,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="331" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OJ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uft-Jq-l71">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OJ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uft-Jq-l71">
                         <rect key="frame" x="10" y="15" width="24" height="25"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,10 +47,19 @@
                         <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_start" highlightedImage="cell_start_click" translatesAutoresizingMaskIntoConstraints="NO" id="5CY-ZT-ivi">
+                        <rect key="frame" x="40" y="21" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="Aij-Xm-o6f"/>
+                            <constraint firstAttribute="width" constant="14" id="mJl-pg-s44"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="5CY-ZT-ivi" firstAttribute="leading" secondItem="uft-Jq-l71" secondAttribute="trailing" constant="6" id="0wP-cS-SiF"/>
                     <constraint firstItem="uft-Jq-l71" firstAttribute="leading" secondItem="zmh-QQ-PlN" secondAttribute="leading" constant="10" id="I9b-ar-9oh"/>
                     <constraint firstItem="Qng-Jp-Gss" firstAttribute="bottom" secondItem="PwI-F3-KSF" secondAttribute="bottom" id="LSy-Kt-fS8"/>
+                    <constraint firstItem="5CY-ZT-ivi" firstAttribute="centerY" secondItem="uft-Jq-l71" secondAttribute="centerY" id="QQ9-EH-3SI"/>
                     <constraint firstItem="q32-lr-dkt" firstAttribute="centerY" secondItem="uft-Jq-l71" secondAttribute="centerY" id="T0L-WN-teV"/>
                     <constraint firstItem="uft-Jq-l71" firstAttribute="top" secondItem="zmh-QQ-PlN" secondAttribute="top" constant="15" id="TzG-vZ-tMa"/>
                     <constraint firstItem="Qng-Jp-Gss" firstAttribute="trailing" secondItem="q32-lr-dkt" secondAttribute="trailing" id="Vcr-8l-dJT"/>
@@ -61,12 +70,17 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="imageStar" destination="5CY-ZT-ivi" id="DLO-1H-sbV"/>
                 <outlet property="name" destination="PwI-F3-KSF" id="u0l-kQ-h5x"/>
                 <outlet property="oj" destination="uft-Jq-l71" id="ELR-GJ-8Dp"/>
                 <outlet property="time" destination="q32-lr-dkt" id="aQd-40-SfF"/>
                 <outlet property="week" destination="Qng-Jp-Gss" id="9Ka-pW-gz7"/>
             </connections>
-            <point key="canvasLocation" x="-221.5" y="494"/>
+            <point key="canvasLocation" x="-106.5" y="379"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="cell_start" width="14" height="14"/>
+        <image name="cell_start_click" width="14" height="14"/>
+    </resources>
 </document>

@@ -55,7 +55,7 @@ static NSString * const ContestCellID = @"contest";
         // create it
         FMDatabase * db = [FMDatabase databaseWithPath:self.dbPath];
         if ([db open]) {
-            NSString * sql = @"CREATE TABLE 'Contest' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'oj' VARCHAR(10),'link' VARCHAR(80),'name' VARCHAR(30), 'start_time' VARCHAR(30), 'week' VARCHAR(5), 'star' TINYINT DEFAULT 0)";
+            NSString * sql = @"CREATE TABLE 'Contest' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'oj' VARCHAR(10),'link' VARCHAR(80),'name' VARCHAR(30), 'start_time' VARCHAR(30), 'week' VARCHAR(5), 'star' TINYINT )";
             BOOL res = [db executeUpdate:sql];
             if (!res) {
                 FJYLog(@"error to create db");
@@ -74,9 +74,10 @@ static NSString * const ContestCellID = @"contest";
     
     FMDatabase * db = [FMDatabase databaseWithPath:self.dbPath];
     if ([db open]) {
-        NSString * sql = @"insert into contest (id, oj, link, name, start_time, week) values(?, ?, ?, ?, ?, ?)";
+        NSString * sql = @"insert into contest (id, oj, link, name, start_time, week, star) values(?, ?, ?, ?, ?, ?, ?)";
         for (ContestModel *contest in self.contests) {
-            BOOL res = [db executeUpdate:sql, [NSNumber numberWithInteger:contest.id], contest.oj, contest.link, contest.name, contest.start_time, contest.week];
+            BOOL res = [db executeUpdate:sql,
+                        [NSNumber numberWithInteger:contest.id], contest.oj, contest.link, contest.name, contest.start_time, contest.week, contest.star];
             if (!res) {
                 FJYLog(@"error to insert data");
             } else {
@@ -90,20 +91,24 @@ static NSString * const ContestCellID = @"contest";
 
 #pragma mark - 生命周期
 - (void)viewWillAppear:(BOOL)animated{
-//    FJYLog(@"%s", __func__);
+
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation:0];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self scrollViewDidScroll:self.tableView];
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // 注册
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ContestCell  class]) bundle:nil] forCellReuseIdentifier:ContestCellID];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ContestCell class]) bundle:nil] forCellReuseIdentifier:ContestCellID];
     // 数据库路径
     NSString * doc = PATH_OF_DOCUMENT;
     NSString * path = [doc stringByAppendingPathComponent:@"contest.sqlite"];
@@ -165,6 +170,7 @@ static NSString * const ContestCellID = @"contest";
                 contest.name = [rs stringForColumn:@"name"];
                 contest.start_time = [rs stringForColumn:@"start_time"];
                 contest.week = [rs stringForColumn:@"week"];
+                contest.star = [rs intForColumn:@"star"];
                 [self.contests addObject:contest];
             }
             [self.tableView reloadData];
@@ -182,12 +188,16 @@ static NSString * const ContestCellID = @"contest";
     //
     [[AFHTTPSessionManager manager]GET:URLStr parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSArray *contestArray = responseObject;
+        
+        // 先清空contests数组中的所有比赛
+        [self.contests removeAllObjects];
         for (NSDictionary *contestDict in contestArray) {
             ContestModel *contest = [ContestModel contestWithDict:contestDict];
             [self.contests addObject:contest];
         }
         [self createTable];
         [self insertData];
+        
         // 刷新表格
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
@@ -203,9 +213,9 @@ static NSString * const ContestCellID = @"contest";
 #pragma mark - UITabBar自动消失
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    FJYLog(@"%s", __func__);
+
     CGFloat offsetY = scrollView.contentOffset.y;
-//    FJYLog(@"----%f", offsetY);
+
     if (offsetY > 0) {
         [self.navigationController.navigationBar fjy_setNavigatdionBarTranslation: offsetY > 44 ? 1 : (offsetY/44)];
     }else{
@@ -225,6 +235,7 @@ static NSString * const ContestCellID = @"contest";
 {
     ContestCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ContestCellID forIndexPath:indexPath];
     cell.contestModel = self.contests[indexPath.row];
+    
     return cell;
 }
 
@@ -234,6 +245,8 @@ static NSString * const ContestCellID = @"contest";
     return contestModel.cellHeight;
 }
 
+
+
 #pragma mark - Table View Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -241,9 +254,8 @@ static NSString * const ContestCellID = @"contest";
     ContestDetailController *detailVC = [ContestDetailController new];
     detailVC.contestModel = self.contests[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
-    
-
 }
+
 
 
 @end

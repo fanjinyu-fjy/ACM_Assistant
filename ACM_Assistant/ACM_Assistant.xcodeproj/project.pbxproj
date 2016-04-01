@@ -27,6 +27,7 @@
 		4495BF9F1CA967610092E8A5 /* UIButton+FJY.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BF9E1CA967610092E8A5 /* UIButton+FJY.m */; };
 		4495BFA51CA96B900092E8A5 /* ContestDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4495BFA41CA96B900092E8A5 /* ContestDetailController.m */; };
 		4495BFA71CA96BAD0092E8A5 /* ContestDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4495BFA61CA96BAD0092E8A5 /* ContestDetailController.xib */; };
+		44BDA26E1CAD44F200AB9F7C /* ContestDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BDA26D1CAD44F200AB9F7C /* ContestDB.m */; };
 		A37AC8228559B0812C24C397 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9373BF414A8C103AC6806B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		4495BFA31CA96B900092E8A5 /* ContestDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContestDetailController.h; path = Controllers/ContestDetailController.h; sourceTree = "<group>"; };
 		4495BFA41CA96B900092E8A5 /* ContestDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContestDetailController.m; path = Controllers/ContestDetailController.m; sourceTree = "<group>"; };
 		4495BFA61CA96BAD0092E8A5 /* ContestDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestDetailController.xib; path = Controllers/ContestDetailController.xib; sourceTree = "<group>"; };
+		44BDA26C1CAD44F200AB9F7C /* ContestDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContestDB.h; path = Cache/ContestDB.h; sourceTree = "<group>"; };
+		44BDA26D1CAD44F200AB9F7C /* ContestDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContestDB.m; path = Cache/ContestDB.m; sourceTree = "<group>"; };
 		44E400951C0DF4B5005F2939 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B4A0D050F1D1FFBF27E6B4D5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CA84896B22A4FF48630726AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +154,7 @@
 				4488DF411BFF1E6400E18482 /* LaunchScreen.storyboard */,
 				440E96761CAA98CA00EA87E8 /* Assets.xcassets */,
 				4488DF441BFF1E6400E18482 /* Info.plist */,
+				44BDA26B1CAD449000AB9F7C /* Cache */,
 				4495BF771CA6C95A0092E8A5 /* Models */,
 				4495BF761CA6C93C0092E8A5 /* Views */,
 				4495BF751CA6C9040092E8A5 /* Controllers */,
@@ -237,6 +241,15 @@
 				4495BF9E1CA967610092E8A5 /* UIButton+FJY.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		44BDA26B1CAD449000AB9F7C /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				44BDA26C1CAD44F200AB9F7C /* ContestDB.h */,
+				44BDA26D1CAD44F200AB9F7C /* ContestDB.m */,
+			);
+			name = Cache;
 			sourceTree = "<group>";
 		};
 		528DA7A59B4CAF024D81FFB4 /* Pods */ = {
@@ -447,6 +460,7 @@
 				4495BF851CA8C0B80092E8A5 /* MainNavigationController.m in Sources */,
 				4495BF7D1CA8BC4F0092E8A5 /* MainTabBarController.m in Sources */,
 				4488DF381BFF1E6400E18482 /* AppDelegate.m in Sources */,
+				44BDA26E1CAD44F200AB9F7C /* ContestDB.m in Sources */,
 				4495BF8B1CA8C9EA0092E8A5 /* ContestTableViewController.m in Sources */,
 				4495BF821CA8BED70092E8A5 /* UIImage+FJY.m in Sources */,
 				4495BFA51CA96B900092E8A5 /* ContestDetailController.m in Sources */,

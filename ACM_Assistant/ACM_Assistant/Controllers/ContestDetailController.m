@@ -15,20 +15,22 @@
 #import <UMSocial.h>
 #import <UMSocialData.h>
 #import <SafariServices/SafariServices.h>
-
+#import <FMDB.h>
 #import "UINavigationBar+FJY.h"
+
 @interface ContestDetailController()<SFSafariViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *contestName;
 @property (weak, nonatomic) IBOutlet UIButton *openSafari;
 @property (weak, nonatomic) IBOutlet UIView *NameView;
-
+@property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
+@property (nonatomic, copy) NSString *dbPath;
 @end
 
 @implementation ContestDetailController
 
 - (void)viewDidLoad{
     
-   self.title = self.contestModel.oj;
+    
     [self setupVC];
     
     
@@ -51,8 +53,40 @@
           forControlEvents:UIControlEventTouchUpInside];
     [shareButton setButtonAnimation];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:shareButton];
+    
+    self.notificationSwitch.on = self.contestModel.star;
+    
+    
 }
 
+
+
+/** 更改Switch按钮 */
+- (IBAction)changeSwitch:(UISwitch *)sender {
+    
+    self.contestModel.star = self.notificationSwitch.isOn;
+
+    // 数据库路径
+    NSString * doc = PATH_OF_DOCUMENT;
+    NSString * path = [doc stringByAppendingPathComponent:@"contest.sqlite"];
+    self.dbPath = path;
+    
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:self.dbPath];
+    if ([db open]) {
+        ContestModel *contest = _contestModel;
+        FJYLog(@"%d", contest.star)
+        ;
+        BOOL res = [db executeUpdate:@"update contest SET star = ? where id = ?", [NSNumber numberWithInt:contest.star], [NSNumber numberWithInteger:contest.id]];
+        if (res) {
+            FJYLog(@"succ update");
+        }else{
+            FJYLog(@"error update");
+        }
+        [db close];
+    }
+    
+}
 
 /** 分享 */
 - (void)socialShare{

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *time;
 @property (weak, nonatomic) IBOutlet UILabel *week;
+@property (weak, nonatomic) IBOutlet UIImageView *imageStar;
 
 @property (nonatomic, strong) ContestModel *contestModel;
 @end

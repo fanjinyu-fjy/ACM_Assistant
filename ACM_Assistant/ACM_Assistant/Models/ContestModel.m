@@ -13,6 +13,14 @@
 {
     CGFloat _cellHeight;
 }
+
+- (id)init{
+    if (self == [super init]) {
+        _star = NO;
+    }
+    return self;
+}
+
 + (instancetype)contestWithDict:(NSDictionary *)dict{
     ContestModel *model = [ContestModel new];
     [model setValuesForKeysWithDictionary:dict];

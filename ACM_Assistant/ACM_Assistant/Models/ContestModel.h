@@ -25,7 +25,8 @@
 @property (nonatomic, copy) NSString *week;
 /** 比赛访问权限 */
 @property (nonatomic, copy) NSString *access;
-
+/** 比赛是否被关注 */
+@property (nonatomic, assign, getter=isStar) BOOL star;
 
 
 /** cell的高度 */

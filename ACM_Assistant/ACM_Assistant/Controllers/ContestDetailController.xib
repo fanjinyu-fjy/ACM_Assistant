@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="NameView" destination="VeL-im-rsq" id="Itw-36-2cU"/>
                 <outlet property="contestName" destination="VVd-Cu-1TP" id="KbZ-8x-gLf"/>
+                <outlet property="notificationSwitch" destination="GRS-yX-hg3" id="phn-nZ-LtN"/>
                 <outlet property="openSafari" destination="yds-x3-i3M" id="guE-t4-zhM"/>
                 <outlet property="view" destination="iN0-l3-epB" id="p5C-iY-r0p"/>
             </connections>
@@ -59,17 +60,41 @@
                         <action selector="openSafari:" destination="-1" eventType="touchUpInside" id="MOV-Rj-Jb2"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify me before start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TU-1C-w7t">
+                    <rect key="frame" x="20" y="254" width="161" height="22"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRS-yX-hg3">
+                    <rect key="frame" x="234" y="249" width="51" height="31"/>
+                    <connections>
+                        <action selector="changeSwitch:" destination="-1" eventType="valueChanged" id="Tp6-p2-dPP"/>
+                    </connections>
+                </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="you can set up the time in the setting page." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3V3-8E-LZv">
+                    <rect key="frame" x="20" y="284" width="250" height="21"/>
+                    <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                    <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="VeL-im-rsq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9yZ-JT-G8G"/>
+                <constraint firstItem="GRS-yX-hg3" firstAttribute="leading" secondItem="6TU-1C-w7t" secondAttribute="trailing" constant="53" id="JUz-XH-IIQ"/>
                 <constraint firstItem="yds-x3-i3M" firstAttribute="top" secondItem="VeL-im-rsq" secondAttribute="bottom" constant="40" id="Tas-Bt-Y3Q"/>
                 <constraint firstAttribute="trailing" secondItem="VeL-im-rsq" secondAttribute="trailing" id="bZE-gY-PVX"/>
                 <constraint firstItem="yds-x3-i3M" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="baM-7Q-CqY"/>
                 <constraint firstItem="VeL-im-rsq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="iqE-I7-8Xu"/>
+                <constraint firstItem="3V3-8E-LZv" firstAttribute="top" secondItem="6TU-1C-w7t" secondAttribute="bottom" constant="8" id="kno-RF-Mos"/>
+                <constraint firstItem="GRS-yX-hg3" firstAttribute="centerY" secondItem="6TU-1C-w7t" secondAttribute="centerY" id="pkS-Uw-LZf"/>
+                <constraint firstItem="6TU-1C-w7t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="qAj-Rz-Qt4"/>
+                <constraint firstItem="6TU-1C-w7t" firstAttribute="top" secondItem="yds-x3-i3M" secondAttribute="bottom" constant="50" id="wKr-nj-eMp"/>
+                <constraint firstItem="3V3-8E-LZv" firstAttribute="leading" secondItem="6TU-1C-w7t" secondAttribute="leading" id="z5y-j4-iTY"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="11" y="259"/>
+            <point key="canvasLocation" x="266" y="260"/>
         </view>
     </objects>
 </document>

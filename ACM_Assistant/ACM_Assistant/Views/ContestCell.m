@@ -21,6 +21,8 @@ static CGFloat CellMargin = 1.0f;
     self.name.text = contestModel.name;
     self.time.text = contestModel.start_time;
     self.week.text = contestModel.week;
+    self.imageStar.highlighted = _contestModel.star;
+    FJYLog(@"%@", contestModel);
     
 }
 
